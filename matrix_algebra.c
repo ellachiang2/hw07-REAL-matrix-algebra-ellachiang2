@@ -83,7 +83,7 @@ mat* matrix_multiply(mat* A, mat*B)
 	
 	//if the multiplication doesnt exist
 	
-	if(A->m != B->n)
+	if(A->m != B->n || A == NULL || B == NULL)
 	{
 		return NULL;
 	}
@@ -113,7 +113,7 @@ mat* matrix_add(mat* A, mat* B)
 {
 	//fill this function to return the matrix A+B, the addition of A and B. Return NULL if the addition does not exist.
 
-	if(A->n != B->n || A->m != B->m)
+	if(A->n != B->n || A->m != B->m || A == NULL || B == NULL)
 	{
 		return NULL;
 	}
@@ -137,6 +137,10 @@ mat* matrix_add(mat* A, mat* B)
 void matrix_free(mat* A)
 {
 	//fill in this funciton to free the matrix A.
+	if( A == NULL)
+	{
+		return;
+	}
 	for(int i = 0; i < A->n; i++)
 	{
 		free(A->n_rows[i]);
@@ -181,6 +185,11 @@ int matrix_write(char* filename, mat* A)
 // fill this function to modify A into cA, that is, to multiply each entry of A by c.
 mat* matrix_scale(double c, mat* A)
 {
+
+	if(A == NULL)
+	{
+		return NULL;
+	}
 	//create the matrix
 	struct matrix *matt = create_matrix(A->n, A->m);
 
